@@ -1,16 +1,138 @@
-# React + Vite
+# 🔹 Micro Earn | Smart Micro-Tasking & Earning Platform
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+🌐 **Live Website:** [https://your-live-site-link.com](https://your-live-site-link.com)
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 📌 Project Overview
 
-## React Compiler
+**MicroEarn** is a full-stack **Micro Task & Earning Platform** built using the **MERN Stack**. The platform allows users to earn money by completing small tasks, while Buyers can create tasks and pay Workers using a coin-based system. Admins manage users, tasks, payments, and withdrawals to ensure system integrity.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+This project is developed as a **Junior MERN Stack Developer**, focusing on real-world business logic, role-based dashboards, secure authentication, and scalable backend architecture.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🚀 Key Features (Highlights)
+
+* 🔐 Secure Authentication using Firebase (Email/Password & Google Login)
+* 🧑‍💻 Role-Based Access Control (Worker, Buyer, Admin)
+* 💰 Coin-Based Earning & Payment System
+* 📋 Task Creation, Submission & Review Workflow
+* ✅ Approval & Rejection System with Notifications
+* 🔔 Real-Time Notification System
+* 💸 Withdrawal System (20 Coins = 1 Dollar)
+* 📊 Dashboard with Dynamic Statistics for Each Role
+* 📱 Fully Responsive Design (Mobile, Tablet & Desktop)
+* 🛡 JWT Protected Private Routes (No Redirect on Reload)
+
+---
+
+## 👥 User Roles & Functionalities
+
+### 🧑‍🔧 Worker
+
+* View available tasks
+* Submit task proofs
+* Track submission status
+* View approved earnings
+* Request withdrawals
+
+### 🧑‍💼 Buyer
+
+* Purchase coins
+* Create and manage tasks
+* Review worker submissions
+* Approve or reject submissions
+* View payment history
+
+### 🛡 Admin
+
+* Manage all users and roles
+* Approve withdrawal requests
+* Manage all tasks
+* Monitor platform statistics
+
+---
+
+## 💡 Business Logic
+
+* Buyer purchases **10 Coins = 1 USD**
+* Worker withdraws **20 Coins = 1 USD**
+* Minimum withdrawal: **200 Coins (10 USD)**
+* Platform earns profit from coin conversion difference
+
+---
+
+## 🧰 Technology Stack
+
+### Frontend
+
+* React.js
+* React Router
+* Tailwind CSS
+* Firebase Authentication
+* Axios
+* Swiper.js
+
+### Backend
+
+* Node.js
+* Express.js
+* MongoDB
+* JWT Authentication
+* Firebase Admin SDK
+* Stripe (or Dummy Payment System)
+
+---
+
+## 🔐 Environment Variables
+
+All sensitive credentials are securely hidden using environment variables:
+
+* Firebase Configuration Keys
+* MongoDB URI
+* JWT Secret Key
+* Stripe Secret Key
+
+---
+
+## 🔑 Admin Credentials (Demo)
+
+* **Admin Email:** [admin@microearn.com](mailto:admin@microearn.com)
+* **Admin Password:** Admin@123
+
+---
+
+## 🔗 Project Links
+
+* 🌐 **Live Site:** [https://your-live-site-link.com](https://your-live-site-link.com)
+* 💻 **Client Repository:** [https://github.com/your-username/microearn-client](https://github.com/your-username/microearn-client)
+* 🗄 **Server Repository:** [https://github.com/your-username/microearn-server](https://github.com/your-username/microearn-server)
+
+---
+
+## 📸 First Impretion
+
+> Add screenshots of Home Page, Dashboard (Worker/Buyer/Admin), Task List, and Payment Pages here.
+
+---
+
+## 📈 Future Improvements
+
+* Automated Email Notifications
+* Advanced Task Search & Filtering
+* Report System for Invalid Submissions
+* Performance Optimization with Aggregation
+
+---
+
+## Developer Info
+
+* **Name:** Lizan
+* **Role:** Junior MERN Stack Developer
+* **GitHub:** [https://github.com/lizansarkar](https://github.com/lizansarkar)
+* **LinkedIn:** [https://www.linkedin.com/in/lizan-sarkar-707042393/](https://linkedin.com/in/your-profile)
+
+---
+
+✨ *MicroEarn — Turn Small Tasks into Real Earnings.*
