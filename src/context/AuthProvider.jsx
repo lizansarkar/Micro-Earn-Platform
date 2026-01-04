@@ -1,65 +1,80 @@
-import React, { useEffect, useState } from 'react'
-import { AuthContext } from './AuthContext'
-import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth'
-import { auth } from '../firebase/firebase.config'
+import { useEffect, useState } from "react";
+import { AuthContext } from "./AuthContext";
+import {
+  createUserWithEmailAndPassword,
+  GoogleAuthProvider,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  signOut,
+  updateProfile,
+} from "firebase/auth";
+import { auth } from "../firebase/firebase.config";
 
-export default function AuthProvider({children}) {
-    const [user, setUser] = useState(null);
-    const [loading, setLoading] = useState(true);
+const googleProvider = new GoogleAuthProvider();
 
-    // register user
-    const registerUser = (email, password) => {
-        setLoading(true)
-        return createUserWithEmailAndPassword(auth, email, password)
-    }
+const AuthProvider = ({ children }) => {
 
-    // sign in user
-    const signInUser = (email, password) => {
-        setLoading(true)
-        return signInWithEmailAndPassword(auth, email, password)
-    }
+  // current user state
+  const [user, setUser] = useState(null);
 
-    //sign in user with popup
-    const provider = new GoogleAuthProvider()
-    const signInWithGoogle = () => {
-        return signInWithPopup(auth, provider);
-    }
+  // loading state (route guard, spinner এর জন্য)
+  const [loading, setLoading] = useState(true);
 
-    //update usr profile
-    const updateUserProfile = (profile) => {
-        return updateProfile(auth.currentUser, profile)
-    }
+  // register user
+  const registerUser = (email, password) => {
+    setLoading(true);
+    return createUserWithEmailAndPassword(auth, email, password);
+  };
 
-    //sign out function
-    const logOut = () => {
-        setLoading(true)
-        return signOut(auth)
-    }
-    
-    //observer state
-    useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-            setUser(currentUser)
-            setLoading(false)
-        })
-        return () => {
-            unsubscribe()
-        }
-    }, [])
+  // login user
+  const signInUser = (email, password) => {
+    setLoading(true);
+    return signInWithEmailAndPassword(auth, email, password);
+  };
 
-    const authInformation = {
-        user,
-        loading,
-        registerUser,
-        signInUser,
-        signInWithGoogle,
-        updateUserProfile,
-        logOut,
-    }
+  // google login
+  const signInWithGoogle = () => {
+    setLoading(true);
+    return signInWithPopup(auth, googleProvider);
+  };
+
+  // update profile (name, photo)
+  const updateUserProfile = (profile) => {
+    return updateProfile(auth.currentUser, profile);
+  };
+
+  // logout
+  const logOut = () => {
+    setLoading(true);
+    return signOut(auth);
+  };
+
+  // auth observer
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+      setLoading(false);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  const authInformation = {
+    user,
+    loading,
+    registerUser,
+    signInUser,
+    signInWithGoogle,
+    updateUserProfile,
+    logOut,
+  };
 
   return (
-    <AuthContext value={authInformation}>
-        {children}
-    </AuthContext>
-  )
-}
+    <AuthContext.Provider value={authInformation}>
+      {children}
+    </AuthContext.Provider>
+  );
+};
+
+export default AuthProvider;

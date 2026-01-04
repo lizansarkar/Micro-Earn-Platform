@@ -1,32 +1,41 @@
 import { useEffect, useState } from "react";
-import useAuth from "./useAuth"; 
-// ⬆️ useAuth থেকে আমরা user পাবো (Firebase user)
+import useAuth from "./useAuth";
 
 const useRole = () => {
-  const { user } = useAuth(); 
-  // ⬆️ বর্তমানে লগইন করা user
+  const { user, loading } = useAuth();
 
   const [role, setRole] = useState(null);
-  // ⬆️ এখানে user এর role রাখবো (admin / worker / buyer)
-
   const [roleLoading, setRoleLoading] = useState(true);
-  // ⬆️ role লোড হচ্ছে কিনা বোঝার জন্য
 
   useEffect(() => {
-    if (user?.email) {
-      // ⬇️ backend এ request যাবে email দিয়ে
-      fetch(`http://localhost:5000/users/role/${user.email}`)
-        .then(res => res.json())
-        .then(data => {
-          setRole(data.role); 
-          // ⬆️ backend থেকে যে role আসবে সেটা set করলাম
-          setRoleLoading(false);
-        });
+
+    // যদি auth এখনো loading হয়
+    if (loading) return;
+
+    // user না থাকলে
+    if (!user?.email) {
+      setRole(null);
+      setRoleLoading(false);
+      return;
     }
-  }, [user]);
+
+    setRoleLoading(true);
+
+    fetch(`${import.meta.env.VITE_API_URL}/users/role/${user.email}`)
+      .then(res => res.json())
+      .then(data => {
+        setRole(data?.role || null);
+        setRoleLoading(false);
+      })
+      .catch(error => {
+        console.error("Role fetch error:", error);
+        setRole(null);
+        setRoleLoading(false);
+      });
+
+  }, [user, loading]);
 
   return { role, roleLoading };
-  // ⬆️ এই দুইটা আমরা AdminRoute / WorkerRoute এ ব্যবহার করবো
 };
 
 export default useRole;
