@@ -1,7 +1,98 @@
 @import "tailwindcss";
 @plugin "daisyui";
 
-/* স্ক্রলবার কাস্টমাইজেশন: ওয়েবসাইটকে আরও প্রিমিয়াম দেখানোর জন্য */
+/* ==========================================================================
+   1. GLOBAL CONFIGURATION & VARIABLES
+   ========================================================================== */
+:root {
+  /* Brand Colors */
+  --color-brand: #5227ff;
+  --color-primary: oklch(55% 0.3 240);
+  
+  /* Shared Radius */
+  --radius-selector: 1rem;
+  --radius-box: 0.8rem;
+
+  /* Theme Transitions */
+  --theme-transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Base Body Styles */
+html, body {
+  transition: var(--theme-transition);
+  min-height: 100vh;
+}
+
+/* ==========================================================================
+   2. THEME MODES (Dark & Light)
+   ========================================================================== */
+
+/* --- DARK MODE STYLES --- */
+html.dark-mode body {
+  --bg-current: #060010;
+  --text-current: #fafafa;
+  --border-current: rgba(255, 255, 255, 0.1);
+  --glass-bg: rgba(6, 0, 16, 0.7);
+  
+  background-color: var(--bg-current) !important;
+  color: var(--text-current) !important;
+}
+
+/* --- LIGHT MODE STYLES --- */
+html.light-mode body {
+  --bg-current: #fafafa;
+  --text-current: #060010;
+  --border-current: rgba(0, 0, 0, 0.1);
+  --glass-bg: rgba(255, 255, 255, 0.7);
+
+  background-color: var(--bg-current) !important;
+  color: var(--text-current) !important;
+}
+
+/* ==========================================================================
+   3. UTILITY CLASSES (Reusable)
+   ========================================================================== */
+
+/* Layout Container (1400px) */
+.max-width-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* Brand Utilities */
+.text-brand { color: var(--color-brand); }
+.bg-brand   { background-color: var(--color-brand); }
+
+/* Glassmorphism Effect */
+.glass-effect {
+  backdrop-filter: blur(12px);
+  background: var(--glass-bg);
+  border: 1px solid var(--border-current);
+}
+
+/* Loading State */
+body.loading {
+  overflow: hidden;
+}
+
+/* ==========================================================================
+   4. COMPONENT-SPECIFIC STYLES
+   ========================================================================== */
+
+/* Dashboard Card Hover Effect */
+.card-hover {
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 30px rgba(82, 39, 255, 0.25);
+}
+
+/* ==========================================================================
+   5. BROWSER CUSTOMIZATION (Scrollbar)
+   ========================================================================== */
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -9,103 +100,12 @@
 ::-webkit-scrollbar-track {
   background: transparent;
 }
+
 ::-webkit-scrollbar-thumb {
-  background-color: #888;
-  border-radius: 4px;
+  background-color: #333; /* Darker thumb for better visibility */
+  border-radius: 10px;
 }
 
-/* ডার্ক এবং লাইট মোড ট্রানজিশন: মোড চেঞ্জ করার সময় স্মুথ ইফেক্ট দিবে */
-html, body {
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-/* ডেইজি ইউআই (DaisyUI) এবং কাস্টম ভেরিয়েবলসমূহ */
-:root {
-  /* বেস কালারগুলো (লাইট মোডের জন্য ডিফল্ট) */
-  --color-base-100: oklch(98% 0.02 240);
-  --color-base-200: oklch(95% 0.03 240);
-  --color-base-300: oklch(92% 0.04 240);
-  --color-base-content: oklch(20% 0.05 240);
-
-  /* প্রাইমারি এবং অন্যান্য ব্র্যান্ড কালার */
-  --color-primary: oklch(55% 0.3 240);
-  --color-primary-content: oklch(98% 0.01 240);
-
-  /* আপনার রিকোয়ার্ড থার্ড কালার (#5227ff) */
-  --color-brand: #5227ff; 
-
-  --color-secondary: oklch(70% 0.25 200);
-  --color-secondary-content: oklch(98% 0.01 200);
-
-  --color-accent: oklch(65% 0.25 160);
-  --color-accent-content: oklch(98% 0.01 160);
-
-  /* সাকসেস, এরর এবং অন্যান্য স্টেট কালার */
-  --color-success: oklch(65% 0.25 140);
-  --color-error: oklch(65% 0.3 30);
-
-  /* রেডিয়াস এবং বর্ডার স্টাইল */
-  --radius-selector: 1rem;
-  --radius-field: 0.25rem;
-  --radius-box: 0.8rem;
-
-  /* ডার্ক এবং লাইট মোডের জন্য কাস্টম ব্যাকগ্রাউন্ড ও টেক্সট ভেরিয়েবল */
-  --bg-dark: #060010;
-  --bg-light: #fafafa;
-  --text-dark: #fafafa;
-  --text-light: #060010;
-  
-  /* গ্লাস ইফেক্ট কালার */
-  --glass-bg: rgba(255, 255, 255, 0.1);
-  --glass-border: rgba(255, 255, 255, 0.2);
-}
-
-/* ১৪০০px কন্টেইনার ক্লাস: এটি আপনি প্রতিটা সেকশনে ব্যবহার করবেন */
-.max-width-container {
-  max-width: 1400px;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 1rem;
-  padding-right: 1rem;
-}
-
-/* ডার্ক মোড বডি স্টাইল */
-body.dark-mode {
-  background-color: var(--bg-dark);
-  color: var(--text-dark);
-}
-
-/* লাইট মোড বডি স্টাইল */
-body.light-mode {
-  background-color: var(--bg-light);
-  color: var(--text-light);
-}
-
-/* গ্লাস ইফেক্ট ক্লাস: কার্ড বা নেভবারে ব্যবহারের জন্য */
-.glass-effect {
-  backdrop-filter: blur(12px);
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-}
-
-/* ব্র্যান্ড কালার টেক্সট ও ব্যাকগ্রাউন্ড ইউটিলিটি */
-.text-brand {
-  color: var(--color-brand);
-}
-
-.bg-brand {
-  background-color: var(--color-brand);
-}
-
-body.loading {
-  overflow: hidden;
-}
-
-/* ড্যাশবোর্ড কার্ডের জন্য কাস্টম হোভার ইফেক্ট */
-.card-hover {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.card-hover:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(82, 39, 255, 0.2);
+html.light-mode ::webkit-scrollbar-thumb {
+  background-color: #ccc;
 }

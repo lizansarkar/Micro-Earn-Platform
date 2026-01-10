@@ -5,20 +5,17 @@ export default function useTheme() {
     localStorage.getItem("theme") || "dark"
   );
 
-  // Whenever theme changes, update body class & localStorage
   useEffect(() => {
-    document.body.classList.remove("dark-mode", "light-mode");
-
-    if (theme === "dark") {
-      document.body.classList.add("dark-mode");
-    } else {
-      document.body.classList.add("light-mode");
-    }
+    const root = window.document.documentElement;
+    
+    root.classList.remove("dark-mode", "light-mode");
+    root.classList.add(`${theme}-mode`);
+    
+    // root.setAttribute("data-theme", theme);
 
     localStorage.setItem("theme", theme);
   }, [theme]);
 
-  // Toggle function
   const toggleTheme = () => {
     setTheme((prev) => (prev === "dark" ? "light" : "dark"));
   };
