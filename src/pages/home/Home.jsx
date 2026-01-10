@@ -1,7 +1,10 @@
 import React from 'react'
+import Loading from '../../components/common/Loading'
 
 export default function Home() {
   return (
-    <div>Home</div>
+    <div>
+      {/* <Loading></Loading> */}
+    </div>
   )
 }
