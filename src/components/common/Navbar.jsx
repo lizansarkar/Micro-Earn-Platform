@@ -100,7 +100,7 @@ export default function Navbar() {
           </button>
 
           {/* Auth Buttons */}
-          <div className="flex gap-2 ml-2">
+          <div className="flex gap-2 ml-2 items-center">
             <Link
               to="/login"
               className="px-5 py-2 text-sm font-bold hover:text-brand transition-colors"
@@ -110,20 +110,39 @@ export default function Navbar() {
 
             <Link
               to="/register"
-              className="relative overflow-hidden px-6 py-2 text-sm font-bold bg-brand text-white rounded-full shadow-lg hover:scale-105 transition-all active:scale-95"
+              className="group relative flex items-center justify-center gap-2.5 px-5 py-2 overflow-hidden rounded-full bg-brand text-white font-bold text-[15px] border-[3px] border-white/30 shadow-2xl transition-all duration-300 hover:scale-105 hover:border-white/60 active:scale-95 outline-none"
             >
+              {/* Button Text */}
               <span className="relative z-10">Join Free</span>
+
+              {/* SVG Icon - Hover করলে ডানে সরবে */}
+              <svg
+                fill="currentColor"
+                viewBox="0 0 24 24"
+                className="w-6 h-6 relative z-10 transition-transform duration-300 group-hover:translate-x-1"
+              >
+                <path
+                  clipRule="evenodd"
+                  d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm4.28 10.28a.75.75 0 000-1.06l-3-3a.75.75 0 10-1.06 1.06l1.72 1.72H8.25a.75.75 0 000 1.5h5.69l-1.72 1.72a.75.75 0 101.06 1.06l3-3z"
+                  fillRule="evenodd"
+                ></path>
+              </svg>
+
+              {/* Shine Effect - Framer Motion দিয়ে এনিমেটেড */}
               <motion.div
-                variants={shineVariant}
-                initial="initial"
-                animate="animate"
+                initial={{ left: "-100px" }}
+                animate={{ left: "100%" }}
                 transition={{
                   repeat: Infinity,
-                  duration: 2,
-                  ease: "linear",
+                  duration: 1.5,
+                  ease: "easeOut",
                   repeatDelay: 1,
                 }}
-                className="absolute top-0 left-0 w-1/2 h-full bg-white/20 skew-x-[-25deg] z-0"
+                className="absolute top-0 w-[100px] h-full opacity-60 z-0 pointer-events-none"
+                style={{
+                  background:
+                    "linear-gradient(120deg, rgba(255,255,255,0) 30%, rgba(255,255,255,0.8), rgba(255,255,255,0) 70%)",
+                }}
               />
             </Link>
           </div>
@@ -175,16 +194,40 @@ export default function Navbar() {
       <div className="md:hidden fixed top-0 left-0 w-full p-4 flex justify-between items-center glass-effect !bg-transparent !border-none z-50">
         <img src="/src/assets/logo.png" alt="Logo" className="h-8 w-auto" />
         <Link
-          to="/login"
-          className="relative overflow-hidden px-5 py-1.5 text-xs font-black uppercase bg-brand text-white rounded-lg"
+          to="/register"
+          className="group relative flex items-center justify-center gap-2.5 px-5 py-2 overflow-hidden rounded-full bg-brand text-white font-bold text-[15px] border-[3px] border-white/30 shadow-2xl transition-all duration-300 hover:scale-105 hover:border-white/60 active:scale-95 outline-none"
         >
-          <span className="relative z-10">Login</span>
+          {/* Button Text */}
+          <span className="relative z-10">Join Free</span>
+
+          {/* SVG Icon - Hover করলে ডানে সরবে */}
+          <svg
+            fill="currentColor"
+            viewBox="0 0 24 24"
+            className="w-6 h-6 relative z-10 transition-transform duration-300 group-hover:translate-x-1"
+          >
+            <path
+              clipRule="evenodd"
+              d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm4.28 10.28a.75.75 0 000-1.06l-3-3a.75.75 0 10-1.06 1.06l1.72 1.72H8.25a.75.75 0 000 1.5h5.69l-1.72 1.72a.75.75 0 101.06 1.06l3-3z"
+              fillRule="evenodd"
+            ></path>
+          </svg>
+
+          {/* Shine Effect - Framer Motion দিয়ে এনিমেটেড */}
           <motion.div
-            variants={shineVariant}
-            initial="initial"
-            animate="animate"
-            transition={{ repeat: Infinity, duration: 1.5, ease: "linear" }}
-            className="absolute top-0 left-0 w-1/2 h-full bg-white/30 skew-x-[-30deg]"
+            initial={{ left: "-100px" }}
+            animate={{ left: "100%" }}
+            transition={{
+              repeat: Infinity,
+              duration: 1.5,
+              ease: "easeOut",
+              repeatDelay: 1,
+            }}
+            className="absolute top-0 w-[100px] h-full opacity-60 z-0 pointer-events-none"
+            style={{
+              background:
+                "linear-gradient(120deg, rgba(255,255,255,0) 30%, rgba(255,255,255,0.8), rgba(255,255,255,0) 70%)",
+            }}
           />
         </Link>
       </div>
