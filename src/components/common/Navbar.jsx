@@ -29,6 +29,7 @@ export default function Navbar() {
     { name: "Dashboard", path: "/dashboard", icon: <FaTasks /> },
     { name: "About", path: "/about", icon: <FaInfoCircle /> },
     { name: "Contact", path: "/contact", icon: <FaEnvelope /> },
+    { name: "Support", path: "/support", icon: <FaEnvelope /> },
   ];
 
   // বাটন শাইন ইফেক্ট ভেরিয়েন্ট

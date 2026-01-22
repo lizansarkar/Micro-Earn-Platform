@@ -41,6 +41,9 @@ import WithdrawRequests from "../pages/Dashboard/Admin/WithdrawRequests";
 /* ===== Error Page ===== */
 import ErrorPage from "../pages/ErrorPage";
 import AdminRoute from "./AdminRoute";
+import About from "../pages/About/About";
+import Contact from "../pages/contact/Contact";
+import Support from "../pages/support/Support";
 
 
 
@@ -54,6 +57,18 @@ export const router = createBrowserRouter([
         index: true,
         element: <Home />,
       },
+      {
+        path: "about",
+        element: <About></About>,
+      },
+      {
+        path: "contact",
+        element: <Contact></Contact>,
+      },
+      {
+        path: "support",
+        element: <Support></Support>,
+      }
     ],
   },
 
