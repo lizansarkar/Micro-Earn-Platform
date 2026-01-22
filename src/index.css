@@ -2,58 +2,49 @@
 @plugin "daisyui";
 
 /* ==========================================================================
-   1. GLOBAL CONFIGURATION & VARIABLES
+   1. TAILWIND DARK MODE BRIDGE (সবচেয়ে গুরুত্বপূর্ণ লাইন)
+   এই লাইনটি Tailwind-কে বলে দিবে যে 'dark-mode' ক্লাস থাকলেই ডার্ক মোড একটিভ হবে।
    ========================================================================== */
+@custom-variant dark (&:where(.dark-mode, .dark-mode *));
+
 :root {
   /* Brand Colors */
   --color-brand: #5227ff;
-  --color-primary: oklch(55% 0.3 240);
   
-  /* Shared Radius */
-  --radius-selector: 1rem;
-  --radius-box: 0.8rem;
-
-  /* Theme Transitions */
-  --theme-transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-}
-
-/* Base Body Styles */
-html, body {
-  transition: var(--theme-transition);
-  min-height: 100vh;
-}
-
-/* ==========================================================================
-   2. THEME MODES (Dark & Light)
-   ========================================================================== */
-
-/* --- DARK MODE STYLES --- */
-html.dark-mode body {
-  --bg-current: #060010;
-  --text-current: #fafafa;
-  --border-current: rgba(255, 255, 255, 0.1);
-  --glass-bg: rgba(6, 0, 16, 0.7);
-  
-  background-color: var(--bg-current) !important;
-  color: var(--text-current) !important;
-}
-
-/* --- LIGHT MODE STYLES --- */
-html.light-mode body {
+  /* Light Mode Variables */
   --bg-current: #fafafa;
   --text-current: #060010;
   --border-current: rgba(0, 0, 0, 0.1);
   --glass-bg: rgba(255, 255, 255, 0.7);
 
-  background-color: var(--bg-current) !important;
-  color: var(--text-current) !important;
+  --theme-transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
 /* ==========================================================================
-   3. UTILITY CLASSES (Reusable)
+   2. THEME MODES (Custom Class based)
    ========================================================================== */
 
-/* Layout Container (1400px) */
+/* ডার্ক মোড ভ্যারিয়েবল আপডেট */
+.dark-mode {
+  --bg-current: #060010;
+  --text-current: #fafafa;
+  --border-current: rgba(255, 255, 255, 0.1);
+  --glass-bg: rgba(6, 0, 16, 0.7);
+}
+
+/* Base Body Styles */
+body {
+  background-color: var(--bg-current);
+  color: var(--text-current);
+  transition: var(--theme-transition);
+  min-height: 100vh;
+  margin: 0;
+}
+
+/* ==========================================================================
+   3. UTILITY CLASSES
+   ========================================================================== */
+
 .max-width-container {
   max-width: 1400px;
   margin: 0 auto;
@@ -71,41 +62,8 @@ html.light-mode body {
   border: 1px solid var(--border-current);
 }
 
-/* Loading State */
-body.loading {
-  overflow: hidden;
-}
-
-/* ==========================================================================
-   4. COMPONENT-SPECIFIC STYLES
-   ========================================================================== */
-
-/* Dashboard Card Hover Effect */
-.card-hover {
-  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
-}
-
-.card-hover:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 15px 30px rgba(82, 39, 255, 0.25);
-}
-
-/* ==========================================================================
-   5. BROWSER CUSTOMIZATION (Scrollbar)
-   ========================================================================== */
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-  background-color: #333; /* Darker thumb for better visibility */
-  border-radius: 10px;
-}
-
-html.light-mode ::webkit-scrollbar-thumb {
-  background-color: #ccc;
-}
+/* Custom Scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background-color: #333; border-radius: 10px; }
+.dark-mode ::-webkit-scrollbar-thumb { background-color: #555; }

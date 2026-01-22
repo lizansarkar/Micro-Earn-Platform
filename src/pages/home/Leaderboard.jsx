@@ -11,7 +11,6 @@ const leaderboardData = [
   { id: 5, name: "Rakib Ahmed", amount: 250.00, image: "https://i.pravatar.cc/150?u=15", tasks: 610 },
 ];
 
-// --- নতুন গোল্ডেন চ্যাম্পিয়ন কার্ড কম্পোনেন্ট ---
 const ChampionCard = ({ champion }) => {
   return (
     <motion.div
@@ -19,53 +18,60 @@ const ChampionCard = ({ champion }) => {
       whileInView={{ opacity: 1, scale: 1 }}
       className="lg:col-span-5 sticky top-24"
     >
-      <div className="relative group p-[3px] rounded-[3.5rem] overflow-hidden shadow-[0_20px_50px_rgba(184,134,11,0.2)]">
-        {/* গোল্ডেন বর্ডার লাইট অ্যানিমেশন */}
+      <div className="relative group p-[3px] rounded-[3.5rem] overflow-hidden shadow-[0_20px_60px_rgba(184,134,11,0.4)]">
+        
+        {/* গোল্ডেন এনিমেটেড বর্ডার - এটি যেকোনো ব্যাকগ্রাউন্ডে ফুটবে */}
         <div className="absolute inset-[-1000%] animate-[spin_5s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#bf953f_0%,#fcf6ba_25%,#b38728_50%,#fcf6ba_75%,#bf953f_100%)]" />
 
-        <div className="relative bg-black dark:bg-red-900 rounded-[3.5rem] p-8 md:p-12 overflow-hidden">
-          {/* শাইন ইফেক্ট */}
+        {/* মেইন বডি - এখানে bg-slate-900 ব্যবহার করেছি যা ডার্ক মোড ছাড়াও ব্ল্যাকিশ দেখাবে */}
+        <div className="relative bg-[#ffffff] dark:bg-[black] rounded-[3.5rem] p-8 md:p-12 overflow-hidden border border-white/10">
+          
+          {/* শাইন এনিমেশন (সাদা আলোর ঝিলিক) */}
           <motion.div 
             animate={{ x: ['-150%', '150%'] }}
             transition={{ repeat: Infinity, duration: 3, ease: "linear", repeatDelay: 2 }}
-            className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 dark:via-white/10 to-transparent -skew-x-12 z-10"
+            className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 z-10"
           />
 
           <div className="relative z-20 text-center">
             <div className="relative inline-block mb-6">
-              <div className="absolute inset-0 rounded-full bg-yellow-500 blur-lg opacity-20 animate-pulse"></div>
-              <div className="relative p-1.5 bg-gradient-to-tr from-[#bf953f] via-[#fcf6ba] to-[#b38728] rounded-full">
+              {/* গোল্ডেন প্রোফাইল রিং */}
+              <div className="relative p-1.5 bg-gradient-to-tr from-[#bf953f] via-[#fcf6ba] to-[#b38728] rounded-full shadow-[0_0_30px_rgba(191,149,63,0.4)]">
                 <img 
                   src={champion.image} 
-                  className="w-32 h-32 md:w-44 md:h-44 rounded-full border-4 border-white dark:border-slate-800 object-cover mx-auto shadow-2xl" 
+                  className="w-32 h-32 md:w-44 md:h-44 rounded-full border-4 border-[#0f172a] object-cover mx-auto" 
                   alt={champion.name} 
                 />
               </div>
+              
+              {/* ফ্লোটিং মুকুট */}
               <motion.div 
-                animate={{ y: [0, -15, 0] }}
+                animate={{ y: [0, -10, 0], rotate: [0, 5, -5, 0] }}
                 transition={{ repeat: Infinity, duration: 3 }}
-                className="absolute -top-8 left-1/2 -translate-x-1/2 drop-shadow-[0_0_10px_rgba(252,246,186,0.8)]"
+                className="absolute -top-8 left-1/2 -translate-x-1/2 drop-shadow-[0_10px_10px_rgba(0,0,0,0.5)]"
               >
                 <FaCrown className="text-5xl text-[#fcf6ba]" />
               </motion.div>
             </div>
 
+            {/* গোল্ডেন নাম */}
             <h3 className="text-3xl md:text-5xl font-black mb-2 bg-gradient-to-b from-[#bf953f] via-[#fcf6ba] to-[#b38728] bg-clip-text text-transparent">
               {champion.name}
             </h3>
             
-            <div className="inline-flex items-center gap-2 px-5 py-1.5 rounded-full bg-yellow-500/10 border border-yellow-500/20 text-yellow-600 dark:text-yellow-400 font-black uppercase text-[10px] tracking-[3px]">
+            <div className="inline-flex items-center gap-2 px-5 py-1.5 rounded-full bg-white/5 border border-white/10 text-yellow-400 font-black uppercase text-[10px] tracking-[4px]">
               <FaTrophy className="animate-bounce" /> Hall of Fame
             </div>
 
-            <div className="mt-8 grid grid-cols-2 gap-4">
-              <div className="bg-slate-50 dark:bg-slate-800/50 p-5 rounded-[2rem] border border-yellow-500/20 shadow-inner">
+            {/* স্ট্যাটাস বক্স */}
+            <div className="mt-10 grid grid-cols-2 gap-4">
+              <div className="bg-white/5 backdrop-blur-xl p-5 rounded-[2rem] border border-white/10">
                 <p className="text-[10px] uppercase font-black text-slate-400 mb-1">Total Earned</p>
-                <p className="text-2xl font-black text-brand">${champion.amount}</p>
+                <p className="text-2xl font-black text-[#fcf6ba]">${champion.amount}</p>
               </div>
-              <div className="bg-slate-50 dark:bg-slate-800/50 p-5 rounded-[2rem] border border-yellow-500/20 shadow-inner">
+              <div className="bg-white/5 backdrop-blur-xl p-5 rounded-[2rem] border border-white/10">
                 <p className="text-[10px] uppercase font-bold text-slate-400 mb-1">Tasks Done</p>
-                <p className="text-2xl font-black text-slate-900 dark:text-white">{champion.tasks}</p>
+                <p className="text-2xl font-black text-white">{champion.tasks}</p>
               </div>
             </div>
           </div>

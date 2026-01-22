@@ -5,6 +5,7 @@ import BestWorkers from './BestWorkers'
 import Testimonials from './Testimonials'
 import PlatformStats from './PlatformStats'
 import Leaderboard from './Leaderboard'
+import RewardMilestones from './RewardMilestones'
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
       <Testimonials></Testimonials>
       <PlatformStats></PlatformStats>
       <Leaderboard></Leaderboard>
+      <RewardMilestones></RewardMilestones>
     </div>
   )
 }
