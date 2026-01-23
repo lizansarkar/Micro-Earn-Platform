@@ -103,14 +103,14 @@ export default function Navbar() {
           {/* Auth Buttons */}
           <div className="flex gap-2 ml-2 items-center">
             <Link
-              to="/login"
+              to="/auth/login"
               className="px-5 py-2 text-sm font-bold hover:text-brand transition-colors"
             >
               Login
             </Link>
 
             <Link
-              to="/register"
+              to="/auth/register"
               className="group relative flex items-center justify-center gap-2.5 px-5 py-2 overflow-hidden rounded-full bg-brand text-white font-bold text-[15px] border-[3px] border-white/30 shadow-2xl transition-all duration-300 hover:scale-105 hover:border-white/60 active:scale-95 outline-none"
             >
               {/* Button Text */}
@@ -203,7 +203,7 @@ export default function Navbar() {
       <div className="md:hidden fixed top-0 left-0 w-full p-4 flex justify-between items-center glass-effect !bg-transparent !border-none z-50">
         <img src="/src/assets/logo.png" alt="Logo" className="h-8 w-auto" />
         <Link
-          to="/register"
+          to="/auth/register"
           className="group relative flex items-center justify-center gap-2.5 px-5 py-2 overflow-hidden rounded-full bg-brand text-white font-bold text-[15px] border-[3px] border-white/30 shadow-2xl transition-all duration-300 hover:scale-105 hover:border-white/60 active:scale-95 outline-none"
         >
           {/* Button Text */}

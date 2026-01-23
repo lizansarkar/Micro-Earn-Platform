@@ -115,7 +115,7 @@ export default function Leaderboard() {
   }, [isInView]);
 
   return (
-    <section ref={containerRef} className="py-24 px-4 dark:bg-slate-950 transition-colors duration-500 overflow-hidden">
+    <section ref={containerRef} className="py-24 px-4 transition-colors duration-500 overflow-hidden">
       <div className="max-w-7xl mx-auto">
         
         {/* Header Section */}
