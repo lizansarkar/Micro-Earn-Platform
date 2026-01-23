@@ -1,44 +1,71 @@
 import React from 'react'
-import { Outlet, NavLink, useLocation } from 'react-router'
+import { Outlet, NavLink, useLocation, Link } from 'react-router'
 import { motion, AnimatePresence } from 'framer-motion'
-import { FaShieldAlt, FaRocket, FaCheckCircle } from 'react-icons/fa'
+import { FaShieldAlt, FaCheckCircle } from 'react-icons/fa'
 
 export default function AuthLayout() {
   const location = useLocation();
 
-  return (
-    // ১. Full Width এবং Full Screen Height নিশ্চিত করা হয়েছে
-    <div className="min-h-screen w-full flex flex-col lg:flex-row bg-[#060010] overflow-hidden">
-      
-      {/* --- বাম পাশ: ব্র্যান্ড ডিটেইলস (৫0% Width on Desktop) --- */}
-      <div className="relative hidden lg:flex lg:w-1/2 flex-col justify-center p-20 bg-gradient-to-br from-brand to-[#1a0b5e] overflow-hidden">
-        {/* ব্যাকগ্রাউন্ড প্যাটার্ন */}
-        <div className="absolute inset-0 opacity-10" 
-             style={{ backgroundImage: 'radial-gradient(circle, #fff 1px, transparent 1px)', backgroundSize: '30px 30px' }}>
-        </div>
+  // ১. সম্পূর্ণ ব্যাকগ্রাউন্ড গ্র্যাডিয়েন্ট স্টাইল
+  const fullBackgroundStyle = {
+    background: 'linear-gradient(to bottom right, #060010, #130a40, #060010)',
+    position: 'relative',
+    minHeight: '100vh',
+    width: '100%'
+  };
 
+  // ২. সেই ফোঁটা ফোঁটা ডট প্যাটার্ন (Dot Pattern Overlay)
+  const patternOverlay = {
+    backgroundImage: `radial-gradient(rgba(255, 255, 255, 0.15) 1.5px, transparent 1.5px)`, // এখানে কালার এবং সাইজ বাড়ানো হয়েছে
+    backgroundSize: '30px 30px',
+    position: 'absolute',
+    inset: 0,
+    zIndex: 1, // কন্টেন্টের নিচে থাকবে
+    pointerEvents: 'none'
+  };
+
+  return (
+    <div style={fullBackgroundStyle} className="flex flex-col lg:flex-row overflow-hidden relative">
+      
+      {/* ৩. ফোঁটা ফোঁটা প্যাটার্ন লেয়ার */}
+      <div style={patternOverlay}></div>
+
+      {/* ৪. ফ্লোটিং হোম লোগো (সেন্টার) */}
+      <div className="absolute top-8 left-1/2 -translate-x-1/2 z-50">
+        {/* Logo */}
+        <Link to="/" className="flex items-center">
+          <img
+            src="/src/assets/logo.png"
+            alt="MicroEarn"
+            className="h-10 md:h-20 w-auto object-contain"
+          />
+        </Link>
+
+        {/* Tagline */}
+        <p className="mt-2 text-sm text-white/70 text-center flex items-center gap-2 justify-center">
+          <FaShieldAlt className="text-yellow-400" /> Go Home
+        </p>
+      </div>
+
+      {/* --- বাম পাশ: ব্র্যান্ড কন্টেন্ট --- */}
+      <div className="relative z-10 hidden lg:flex lg:w-1/2 flex-col justify-center p-20">
         <motion.div
           initial={{ x: -50, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
-          className="relative z-10"
         >
-          <div className="w-20 h-20 bg-white/10 backdrop-blur-xl rounded-3xl flex items-center justify-center mb-10 shadow-2xl border border-white/20">
-            <FaShieldAlt className="text-white text-4xl" />
-          </div>
-          
           <h1 className="text-7xl font-black text-white uppercase tracking-tighter leading-[0.9] mb-8">
             Start Your <br /> <span className="text-yellow-400">Digital</span> <br /> Journey
           </h1>
 
           <ul className="space-y-4 mb-12">
             <li className="flex items-center gap-3 text-white/80 font-medium text-lg">
-               <FaCheckCircle className="text-yellow-400" /> Secure Encryption
+               <FaCheckCircle className="text-yellow-400 shadow-sm" /> Secure Encryption
             </li>
             <li className="flex items-center gap-3 text-white/80 font-medium text-lg">
-               <FaCheckCircle className="text-yellow-400" /> Instant Rewards
+               <FaCheckCircle className="text-yellow-400 shadow-sm" /> Instant Rewards
             </li>
             <li className="flex items-center gap-3 text-white/80 font-medium text-lg">
-               <FaCheckCircle className="text-yellow-400" /> 24/7 Support Center
+               <FaCheckCircle className="text-yellow-400 shadow-sm" /> 24/7 Support Center
             </li>
           </ul>
 
@@ -55,49 +82,43 @@ export default function AuthLayout() {
         </motion.div>
       </div>
 
-      {/* --- ডান পাশ: ডাইনামিক ফর্ম সেকশন (Outlet) --- */}
-      <div className="w-full lg:w-1/2 min-h-screen flex flex-col justify-center p-8 md:p-20 relative bg-[#060010]">
-        
-        {/* মোবাইল ভিউর জন্য লোগো */}
-        <div className="lg:hidden mb-10 flex justify-center">
-            <FaShieldAlt className="text-brand text-5xl" />
-        </div>
+      {/* ৫. মাঝখানের উজ্জ্বল ডিভাইডার */}
+      <div className="hidden lg:block absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[1.5px] h-[75%] bg-gradient-to-b from-transparent via-white/20 to-transparent z-20">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 bg-brand rounded-full blur-[6px] animate-pulse"></div>
+      </div>
 
+      {/* --- ডান পাশ: রাউটিং কন্টেন্ট --- */}
+      <div className="w-full lg:w-1/2 min-h-screen flex flex-col justify-center p-8 md:p-20 relative z-10">
         <div className="max-w-md w-full mx-auto">
-          {/* ২. ট্যাব সুইচার: NavLink ব্যবহার করা হয়েছে রাউটিং কন্ট্রোল করতে */}
-          <div className="flex bg-slate-100 dark:bg-slate-900/50 p-1.5 rounded-3xl mb-12 w-full border border-white/5">
+          {/* ট্যাব সুইচার */}
+          <div className="flex bg-white/5 backdrop-blur-xl p-1.5 rounded-[2rem] mb-12 w-full border border-white/10 shadow-2xl">
              <NavLink 
                 to="/auth/login"
-                className={({ isActive }) => `flex-1 py-4 rounded-2xl text-xs font-black uppercase tracking-[2px] text-center transition-all ${isActive ? 'bg-brand text-white shadow-2xl scale-[1.02]' : 'text-slate-500 hover:text-slate-300'}`}
+                className={({ isActive }) => `flex-1 py-4 rounded-[1.5rem] text-xs font-black uppercase tracking-[2px] text-center transition-all ${isActive ? 'bg-brand text-white shadow-[0_10px_25px_rgba(82,39,255,0.4)] scale-[1.02]' : 'text-white/40 hover:text-white'}`}
              >
                 Login
              </NavLink>
              <NavLink 
                 to="/auth/register"
-                className={({ isActive }) => `flex-1 py-4 rounded-2xl text-xs font-black uppercase tracking-[2px] text-center transition-all ${isActive ? 'bg-brand text-white shadow-2xl scale-[1.02]' : 'text-slate-500 hover:text-slate-300'}`}
+                className={({ isActive }) => `flex-1 py-4 rounded-[1.5rem] text-xs font-black uppercase tracking-[2px] text-center transition-all ${isActive ? 'bg-brand text-white shadow-[0_10px_25px_rgba(82,39,255,0.4)] scale-[1.02]' : 'text-white/40 hover:text-white'}`}
              >
                 Register
              </NavLink>
           </div>
 
-          {/* ৩. আউটলেট: এখানে Login বা Register কম্পোনেন্ট রেন্ডার হবে */}
           <div className="relative">
              <AnimatePresence mode="wait">
                 <motion.div
                   key={location.pathname}
-                  initial={{ y: 20, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  exit={{ y: -20, opacity: 0 }}
-                  transition={{ duration: 0.4, ease: "backOut" }}
+                  initial={{ x: 20, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  exit={{ x: -20, opacity: 0 }}
+                  transition={{ duration: 0.4, ease: "easeOut" }}
                 >
                   <Outlet />
                 </motion.div>
              </AnimatePresence>
           </div>
-
-          <p className="mt-10 text-center text-slate-500 text-sm font-medium">
-             By continuing, you agree to our <span className="text-brand cursor-pointer hover:underline">Terms of Service</span>
-          </p>
         </div>
       </div>
     </div>
