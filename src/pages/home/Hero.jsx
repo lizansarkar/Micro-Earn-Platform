@@ -61,7 +61,7 @@ export default function Hero() {
   const SLIDE_DURATION = 5000; // ৫ সেকেন্ড প্রতি স্লাইড
 
   return (
-    <section className="relative h-[90vh] md:h-screen w-full overflow-hidden top-7">
+    <section className="relative h-[90vh] md:h-screen w-full overflow-hidden -top-16">
       
       {/* --- SEGMENTED PROGRESS BAR (As per your Image) --- */}
       <div className="absolute top-0 left-0 w-full h-1.5 z-50 flex gap-1 px-4 mt-2">

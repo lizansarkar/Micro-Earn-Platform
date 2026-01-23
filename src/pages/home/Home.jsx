@@ -11,11 +11,11 @@ export default function Home() {
   return (
     <div>
       <Hero></Hero>
+      <RewardMilestones></RewardMilestones>
       <BestWorkers></BestWorkers>
       <Testimonials></Testimonials>
       <PlatformStats></PlatformStats>
       <Leaderboard></Leaderboard>
-      <RewardMilestones></RewardMilestones>
     </div>
   )
 }

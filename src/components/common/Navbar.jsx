@@ -26,10 +26,10 @@ export default function Navbar() {
 
   const navLinks = [
     { name: "Home", path: "/", icon: <FaHome /> },
-    { name: "Dashboard", path: "/dashboard", icon: <FaTasks /> },
     { name: "About", path: "/about", icon: <FaInfoCircle /> },
     { name: "Contact", path: "/contact", icon: <FaEnvelope /> },
     { name: "Support", path: "/support", icon: <FaEnvelope /> },
+    { name: "Dashboard", path: "/dashboard", icon: <FaTasks /> },
   ];
 
   // বাটন শাইন ইফেক্ট ভেরিয়েন্ট
@@ -93,12 +93,12 @@ export default function Navbar() {
           </div>
 
           {/* Theme Toggle */}
-          <button
+          {/* <button
             onClick={toggleTheme}
             className="p-2.5 rounded-full bg-black/5 dark:bg-white/10 hover:bg-brand hover:text-white transition-all cursor-pointer border border-transparent dark:border-white/5"
           >
             {theme === "dark" ? <FaSun size={18} /> : <FaMoon size={18} />}
-          </button>
+          </button> */}
 
           {/* Auth Buttons */}
           <div className="flex gap-2 ml-2 items-center">
@@ -147,6 +147,14 @@ export default function Navbar() {
               />
             </Link>
           </div>
+
+          {/* Theme Toggle */}
+          <button
+            onClick={toggleTheme}
+            className="p-2.5 rounded-full bg-black/5 dark:bg-white/10 hover:bg-brand hover:text-white transition-all cursor-pointer border border-transparent dark:border-white/5"
+          >
+            {theme === "dark" ? <FaSun size={18} /> : <FaMoon size={18} />}
+          </button>
         </div>
       </nav>
 

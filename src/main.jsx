@@ -8,6 +8,11 @@ import { router } from "./routes/Router";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import AuthProvider from "./context/AuthProvider";
 
+// চেক করবে যদি আগে থেকে কোনো থিম সেভ করা না থাকে, তবে ডার্ক মোড সেট করবে
+if (!localStorage.getItem('theme')) {
+  document.documentElement.classList.add('dark-mode');
+}
+
 /* ================= React Query Config ================= */
 const queryClient = new QueryClient({
   defaultOptions: {
