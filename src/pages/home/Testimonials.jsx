@@ -21,7 +21,7 @@ export default function Testimonials() {
   ];
 
   return (
-    <section className="py-16 md:py-24 px-4 dark:bg-slate-950 transition-colors duration-300 overflow-hidden">
+    <section className="py-16 md:py-24 px-4 transition-colors duration-300 overflow-hidden">
       <div className="max-w-6xl mx-auto">
         
         {/* Section Header */}
