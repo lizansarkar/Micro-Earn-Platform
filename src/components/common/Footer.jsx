@@ -43,9 +43,7 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="relative mt-20 border-t border-black/5 dark:border-white/5">
-      {/* Background Glow Effect (Dark Mode only) */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[1px] bg-gradient-to-r from-transparent via-brand to-transparent opacity-30"></div>
+    <footer className="relative mt-20">
 
       <div className="max-width-container py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12">
@@ -114,7 +112,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="mt-16 pt-8 border-t border-black/5 dark:border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
+        <div className="mt-16 py-8 border-t border-black/5 dark:border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-xs opacity-50 font-medium">
             © {currentYear} <span className="text-brand">MicroEarn</span>. All rights reserved.
           </p>

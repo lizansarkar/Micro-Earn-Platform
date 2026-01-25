@@ -89,7 +89,7 @@ export default function AuthLayout() {
 
       {/* --- ডান পাশ: রাউটিং কন্টেন্ট --- */}
       <div className="w-full lg:w-1/2 min-h-screen flex flex-col justify-center p-8 md:p-20 relative z-10">
-        <div className="max-w-md w-full mx-auto">
+        <div className="max-w-md w-full mx-auto mt-20 lg:mt-0">
           {/* ট্যাব সুইচার */}
           <div className="flex bg-white/5 backdrop-blur-xl p-1.5 rounded-[2rem] mb-12 w-full border border-white/10 shadow-2xl">
              <NavLink 
