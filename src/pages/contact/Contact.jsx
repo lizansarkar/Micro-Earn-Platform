@@ -1,151 +1,159 @@
-import React, { useState, useEffect } from "react";
-import { Menu, Coins, Sun, Moon, LogOut, Settings, Home, LayoutDashboard, Zap } from "lucide-react";
-import useAuth from "../../hooks/UseAuth";
-import useTheme from "../../hooks/useTheme";
-import { motion, AnimatePresence } from "framer-motion";
-import { useNavigate, NavLink } from "react-router";
-import useAxiosSecure from "../../hooks/useAxiosSecure";
+import React from "react";
+import { useForm } from "react-hook-form";
+import { motion } from "framer-motion";
+import Swal from "sweetalert2"; // আপনার ডিপেন্ডেন্সিতে এটি আছে
+import { 
+  FaEnvelope, 
+  FaMapMarkerAlt, 
+  FaPhoneAlt, 
+  FaFacebook, 
+  FaTwitter, 
+  FaLinkedin, 
+  FaPaperPlane 
+} from "react-icons/fa";
 
-const DashboardNav = ({ setSidebarOpen }) => {
-  const { user, logOut } = useAuth();
-  const { theme, toggleTheme } = useTheme();
-  const [isOpen, setIsOpen] = useState(false);
-  const [dbUser, setDbUser] = useState(null);
-  const navigate = useNavigate();
-  const axiosSecure = useAxiosSecure();
+const Contact = () => {
+  // React Hook Form Setup
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isSubmitting },
+  } = useForm();
 
-  useEffect(() => {
-    if (user?.email) {
-      axiosSecure.get(`/users/${user.email}`)
-        .then(res => setDbUser(res.data))
-        .catch(err => console.error("Error fetching user:", err));
-    }
-  }, [user?.email, axiosSecure]);
+  // Form Submit Handler
+  const onSubmit = async (data) => {
+    // এখানে আপনার API কল বা Firebase লজিক বসবে
+    console.log("Form Data:", data);
+    
+    // একটি ডেমো ডিলে (যাতে ইউজার প্রিমিয়াম ফিল পায়)
+    await new Promise((resolve) => setTimeout(resolve, 2000));
 
-  const handleLogOut = async () => {
-    await logOut();
-    navigate("/");
+    Swal.fire({
+      title: "Success!",
+      text: "Your message has been sent successfully.",
+      icon: "success",
+      confirmButtonColor: "#your-brand-color", // আপনার ব্র্যান্ড কালার দিন
+    });
+    
+    reset(); // ফর্ম ক্লিয়ার করা
   };
 
-  // নেভিগেশন লিংক স্টাইল (কালার ম্যাচিং উইথ কন্টাক্ট পেজ)
-  const navLinkStyle = "flex items-center gap-2 px-4 py-2 rounded-xl text-[11px] font-black uppercase tracking-widest transition-all cursor-pointer";
+  const contactInfo = [
+    { icon: <FaMapMarkerAlt />, title: "Our Location", desc: "123 Business Avenue, Dhaka" },
+    { icon: <FaEnvelope />, title: "Email Address", desc: "support@microearn.com" },
+    { icon: <FaPhoneAlt />, title: "Phone Number", desc: "+880 1234 567 890" },
+  ];
 
   return (
-    <header className="w-full border border-gray-100 dark:border-white/10 rounded-[2rem] px-4 lg:px-6 py-3 flex items-center justify-between backdrop-blur-md relative z-[100] shadow-sm dark:shadow-none transition-colors duration-300">
-      
-      {/* ১. বাম দিকের সেকশন */}
-      <div className="flex items-center gap-4">
-        <button 
-          onClick={() => setSidebarOpen(true)} 
-          className="lg:hidden p-2 hover:bg-gray-100 dark:hover:bg-white/5 rounded-xl text-gray-500 dark:text-gray-400 cursor-pointer transition-colors"
-        >
-          <Menu size={24} />
-        </button>
-
-        <nav className="hidden md:flex items-center gap-2">
-          <NavLink to="/" className={({isActive}) => `${navLinkStyle} ${isActive ? 'bg-brand' : ''}`}>
-            <Home size={14}/> Home
-          </NavLink>
-          <NavLink to="/dashboard" end className={({isActive}) => `${navLinkStyle} ${isActive ? 'bg-brand text-white' : 'text-white/40 hover:text-white'}`}>
-            <LayoutDashboard size={14}/> Stats
-          </NavLink>
-        </nav>
-      </div>
-
-      {/* ২. ডান পাশের সেকশন */}
-      <div className="flex items-center gap-3 lg:gap-6">
-        
-        {/* কয়েন ডিসপ্লে */}
-        <div className="bg-brand/5 dark:bg-brand/10 border border-brand/10 dark:border-brand/20 px-3 lg:px-5 py-2 rounded-2xl flex items-center gap-2 lg:gap-3 select-none">
-          <div className="bg-brand p-1.5 rounded-lg shadow-lg shadow-brand/20">
-            <Coins className="text-white" size={14} />
-          </div>
-          <div className="flex flex-col">
-            <span className="font-black text-gray-900 dark:text-brand text-xs lg:text-sm leading-none">{dbUser?.coins || 0}</span>
-            <span className="text-[8px] uppercase font-bold text-gray-400 dark:text-brand/60 tracking-wider">Credits</span>
-          </div>
-        </div>
-
-        {/* থিম টগল */}
-        <button
-          onClick={toggleTheme}
-          className="p-2.5 rounded-xl bg-gray-50 dark:bg-white/5 hover:bg-brand hover:text-white transition-all border border-gray-100 dark:border-white/10 cursor-pointer group flex items-center justify-center shadow-sm active:scale-95"
-        >
-          {theme === "dark" ? (
-            <Sun size={18} className="group-hover:rotate-45 transition-transform" />
-          ) : (
-            <Moon size={18} className="group-hover:-rotate-12 transition-transform text-gray-600" />
-          )}
-        </button>
-
-        {/* প্রোফাইল ড্রপডাউন */}
-        <div className="relative">
-          <button 
-            onClick={() => setIsOpen(!isOpen)}
-            className="flex items-center gap-3 p-1 pr-3 rounded-2xl hover:bg-gray-50 dark:hover:bg-white/5 transition-all border border-transparent hover:border-gray-100 dark:hover:border-white/10 cursor-pointer active:scale-95"
+    <div className="min-h-screen py-20 px-4">
+      <div className="max-w-7xl mx-auto">
+        <div className="text-center mb-16">
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            className="text-4xl lg:text-5xl font-black mb-4 dark:text-white text-slate-900"
           >
-            <div className="relative">
-              <img 
-                src={user?.photoURL || "https://i.ibb.co/mR79YyZ/user.png"} 
-                className="w-10 h-10 rounded-xl border-2 border-brand/30 object-cover shadow-sm" 
-                alt="Profile" 
-              />
-              <span className="absolute -bottom-1 -right-1 w-3 h-3 bg-green-500 border-2 border-white dark:border-[#060010] rounded-full"></span>
-            </div>
+            Get In <span className="text-brand">Touch</span>
+          </motion.h2>
+          <p className="text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">
+            Have questions? Send us a message and we'll get back to you shortly.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+          {/* Left Side: Info */}
+          <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} className="lg:col-span-5 space-y-6">
+            {contactInfo.map((info, index) => (
+              <div key={index} className="flex items-start gap-5 p-6 rounded-[2rem] glass-effect border border-black/5 dark:border-white/5 hover:border-brand/30 transition-all">
+                <div className="p-4 rounded-2xl bg-brand/10 text-brand">{info.icon}</div>
+                <div>
+                  <h4 className="font-bold dark:text-white text-slate-800">{info.title}</h4>
+                  <p className="text-gray-500 dark:text-gray-400 mt-1">{info.desc}</p>
+                </div>
+              </div>
+            ))}
             
-            <div className="hidden md:flex flex-col text-left">
-              <span className="text-gray-900 dark:text-white font-black text-xs uppercase tracking-tighter leading-none">
-                {dbUser?.name?.split(' ')[0] || user?.displayName?.split(' ')[0] || "User"}
-              </span>
-              <span className="text-brand text-[9px] font-bold uppercase tracking-[2px] mt-1">
-                {dbUser?.role || 'Member'}
-              </span>
+            <div className="p-8 rounded-[2.5rem] bg-brand text-white relative overflow-hidden group">
+              <h4 className="text-xl font-bold relative z-10">Follow Us</h4>
+              <div className="flex gap-4 mt-3 relative z-10">
+                <FaFacebook className="cursor-pointer hover:scale-125 transition-transform" />
+                <FaTwitter className="cursor-pointer hover:scale-125 transition-transform" />
+                <FaLinkedin className="cursor-pointer hover:scale-125 transition-transform" />
+              </div>
+              <FaPaperPlane className="text-8xl absolute -right-5 -bottom-5 opacity-20" />
             </div>
-          </button>
+          </motion.div>
 
-          {/* ড্রপডাউন মেনু */}
-          <AnimatePresence>
-            {isOpen && (
-              <>
-                <div className="fixed inset-0 z-[110] cursor-default" onClick={() => setIsOpen(false)}></div>
-                
-                <motion.div
-                  initial={{ opacity: 0, y: 15, scale: 0.95 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: 15, scale: 0.95 }}
-                  className="absolute right-0 mt-4 w-64 bg-white dark:bg-[#0c051a] border border-gray-100 dark:border-white/10 rounded-[1.5rem] shadow-2xl p-3 z-[120] backdrop-blur-2xl"
-                >
-                  <div className="px-4 py-4 border-b border-gray-100 dark:border-white/5 mb-2 bg-gray-50 dark:bg-white/[0.02] rounded-2xl">
-                    <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">{dbUser?.role} ID</p>
-                    <p className="text-sm font-black text-gray-900 dark:text-white truncate mt-1">{dbUser?.name || user?.displayName}</p>
-                    <p className="text-[10px] text-brand font-bold truncate">{user?.email}</p>
-                  </div>
+          {/* Right Side: Professional Hook Form */}
+          <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} className="lg:col-span-7 glass-effect border border-black/5 dark:border-white/5 rounded-[3rem] p-8 lg:p-12 shadow-2xl">
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                {/* Name Field */}
+                <div className="space-y-1">
+                  <label className="text-sm font-bold ml-2 opacity-70">Name</label>
+                  <input 
+                    {...register("name", { required: "Name is required" })}
+                    className={`w-full px-6 py-4 rounded-2xl bg-black/5 dark:bg-white/5 border ${errors.name ? 'border-red-500' : 'border-transparent'} focus:border-brand outline-none transition-all dark:text-white`}
+                    placeholder="John Doe"
+                  />
+                  {errors.name && <p className="text-red-500 text-xs ml-2 mt-1">{errors.name.message}</p>}
+                </div>
 
-                  <div className="space-y-1">
-                    <button className="w-full flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-gray-50 dark:hover:bg-white/5 text-gray-600 dark:text-white/70 hover:text-brand transition-all text-xs font-bold uppercase cursor-pointer group">
-                      <Zap size={16} className="text-brand group-hover:scale-110 transition-transform" /> My Profile
-                    </button>
-                    <button className="w-full flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-gray-50 dark:hover:bg-white/5 text-gray-600 dark:text-white/70 hover:text-brand transition-all text-xs font-bold uppercase cursor-pointer group">
-                      <Settings size={16} className="text-brand group-hover:rotate-45 transition-transform" /> Settings
-                    </button>
-                  </div>
+                {/* Email Field */}
+                <div className="space-y-1">
+                  <label className="text-sm font-bold ml-2 opacity-70">Email</label>
+                  <input 
+                    {...register("email", { 
+                      required: "Email is required",
+                      pattern: { value: /^\S+@\S+$/i, message: "Invalid email address" }
+                    })}
+                    className={`w-full px-6 py-4 rounded-2xl bg-black/5 dark:bg-white/5 border ${errors.email ? 'border-red-500' : 'border-transparent'} focus:border-brand outline-none transition-all dark:text-white`}
+                    placeholder="john@example.com"
+                  />
+                  {errors.email && <p className="text-red-500 text-xs ml-2 mt-1">{errors.email.message}</p>}
+                </div>
+              </div>
 
-                  <div className="h-[1px] bg-gray-100 dark:bg-white/5 my-2 mx-2"></div>
+              {/* Subject Field */}
+              <div className="space-y-1">
+                <label className="text-sm font-bold ml-2 opacity-70">Subject</label>
+                <input 
+                  {...register("subject", { required: "Subject is required" })}
+                  className={`w-full px-6 py-4 rounded-2xl bg-black/5 dark:bg-white/5 border ${errors.subject ? 'border-red-500' : 'border-transparent'} focus:border-brand outline-none transition-all dark:text-white`}
+                  placeholder="How can we help?"
+                />
+                {errors.subject && <p className="text-red-500 text-xs ml-2 mt-1">{errors.subject.message}</p>}
+              </div>
 
-                  <button 
-                    onClick={handleLogOut}
-                    className="w-full flex items-center gap-3 px-4 py-3 rounded-xl bg-red-500/5 hover:bg-red-500/10 text-red-500 transition-all text-xs font-black uppercase tracking-[2px] cursor-pointer"
-                  >
-                    <LogOut size={16} /> Logout
-                  </button>
-                </motion.div>
-              </>
-            )}
-          </AnimatePresence>
+              {/* Message Field */}
+              <div className="space-y-1">
+                <label className="text-sm font-bold ml-2 opacity-70">Message</label>
+                <textarea 
+                  rows="4"
+                  {...register("message", { required: "Message cannot be empty", minLength: { value: 10, message: "Minimum 10 characters required" } })}
+                  className={`w-full px-6 py-4 rounded-3xl bg-black/5 dark:bg-white/5 border ${errors.message ? 'border-red-500' : 'border-transparent'} focus:border-brand outline-none transition-all dark:text-white resize-none`}
+                  placeholder="Write details..."
+                />
+                {errors.message && <p className="text-red-500 text-xs ml-2 mt-1">{errors.message.message}</p>}
+              </div>
+
+              {/* Submit Button */}
+              <button 
+                disabled={isSubmitting}
+                type="submit"
+                className="w-full py-5 rounded-2xl bg-brand text-white font-bold text-lg shadow-xl shadow-brand/30 hover:scale-[1.01] active:scale-95 transition-all flex items-center justify-center gap-3 disabled:opacity-70 disabled:cursor-not-allowed"
+              >
+                {isSubmitting ? "Sending..." : "Send Message"}
+                <FaPaperPlane className={isSubmitting ? "animate-ping" : ""} />
+              </button>
+            </form>
+          </motion.div>
         </div>
       </div>
-    </header>
+    </div>
   );
 };
 
-export default DashboardNav;
+export default Contact;
