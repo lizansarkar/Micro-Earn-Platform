@@ -32,7 +32,7 @@ const DashboardNav = ({ setSidebarOpen }) => {
   const navLinkStyle = "flex items-center gap-2 px-4 py-2 rounded-xl text-[11px] font-black uppercase tracking-widest transition-all cursor-pointer";
 
   return (
-    <header className="w-full dark:bg-neutral/20 border border-primary/15 rounded-[2rem] px-4 lg:px-6 py-3 flex items-center justify-between backdrop-blur-md relative z-[100] transition-colors duration-300">
+    <header className="w-full dark:bg-neutral/20 border border-gray-100 dark:border-white/10 shadow-xl dark:shadow-none rounded-[2rem] px-4 lg:px-6 py-3 flex items-center justify-between backdrop-blur-md relative z-[100] transition-colors duration-300">
       
       {/* ১. বাম দিকের সেকশন: কুইক লিংকস */}
       <div className="flex items-center gap-4">
