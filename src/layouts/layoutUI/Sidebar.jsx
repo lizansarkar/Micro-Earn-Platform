@@ -98,15 +98,6 @@ const Sidebar = ({ setSidebarOpen }) => {
             Visit our 24/7 center.
           </p>
         </div>
-
-        {/* Logout Button */}
-        <button
-          onClick={handleLogout}
-          className="w-full flex items-center gap-3 px-5 py-4 rounded-2xl transition-all duration-300 font-bold text-[11px] uppercase tracking-widest border border-transparent text-red-500 hover:bg-red-50 dark:hover:bg-red-500/10 cursor-pointer"
-        >
-          <LogOut size={18} />
-          Logout
-        </button>
       </div>
     </div>
   );

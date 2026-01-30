@@ -70,7 +70,7 @@ const DashboardNav = ({ setSidebarOpen }) => {
         {/* থিম টগল বাটন */}
         <button
           onClick={toggleTheme}
-          className="p-2.5 rounded-xl bg-base-content/5 hover:bg-primary hover:text-primary-content transition-all border border-base-content/10 cursor-pointer group flex items-center justify-center shadow-sm active:scale-95"
+          className="p-2.5 rounded-full bg-base-content/5 hover:bg-primary hover:text-primary-content transition-all border border-base-content/10 cursor-pointer group flex items-center justify-center shadow-sm active:scale-95"
           title="Toggle Theme"
         >
           {theme === "dark" ? (
@@ -89,7 +89,7 @@ const DashboardNav = ({ setSidebarOpen }) => {
             <div className="relative">
               <img 
                 src={user?.photoURL || "https://i.ibb.co/mR79YyZ/user.png"} 
-                className="w-10 h-10 rounded-xl border-2 border-primary/30 object-cover shadow-md" 
+                className="w-10 h-10 rounded-full border-2 border-primary/30 object-cover shadow-md" 
                 alt="Profile"
               />
               <span className="absolute -bottom-1 -right-1 w-3 h-3 bg-success border-2 border-base-100 rounded-full"></span>
