@@ -19,8 +19,8 @@ import BuyerRoute from "./BuyerRoute";
 /* ===== Worker Pages ===== */
 import WorkerHome from "../pages/Dashboard/Worker/WorkerHome";
 import TaskList from "../pages/Dashboard/Worker/TaskList";
+import MySubmissions from "../pages/dashboard/worker/MySubmissions";
 import TaskDetails from "../pages/Dashboard/Worker/TaskDetails";
-import MySubmissions from "../pages/Dashboard/Worker/MySubmissions";
 import ApprovedSubmissions from "../pages/Dashboard/Worker/ApprovedSubmissions";
 import Withdrawals from "../pages/Dashboard/Worker/Withdrawals";
 
@@ -99,7 +99,7 @@ export const router = createBrowserRouter([
     children: [
       /* -------- WORKER DASHBOARD -------- */
       {
-        path: "worker",
+        path: "/dashboard/worker",
         element: (
           <WorkerRoute>
             <WorkerHome />

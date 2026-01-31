@@ -14,7 +14,7 @@ import {
 } from "lucide-react";
 import Swal from "sweetalert2";
 import useAuth from "../../hooks/UseAuth";
-import axios from "axios"; // সরাসরি axios অথবা useAxiosPublic ব্যবহার করুন
+import axios from "axios";
 
 export default function Register() {
   const { registerUser, updateUserProfile, signInWithGoogle } = useAuth();

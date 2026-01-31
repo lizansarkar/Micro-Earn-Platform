@@ -1,6 +1,5 @@
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
-// import { AuthContext } from "../contexts/AuthProvider";
 
 /*
   useAuth হলো একটা custom hook

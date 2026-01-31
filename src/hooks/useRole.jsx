@@ -1,39 +1,54 @@
 import { useEffect, useState } from "react";
-import useAuth from "./useAuth";
+import useAuth from "./UseAuth";
 
 const useRole = () => {
   const { user, loading } = useAuth();
-
   const [role, setRole] = useState(null);
   const [roleLoading, setRoleLoading] = useState(true);
 
   useEffect(() => {
+    // ১. মেইন Auth লোডিং অবস্থায় থাকলে রোল লোডিং থামিয়ে রাখা যাবে না
+    if (loading) {
+      setRoleLoading(true);
+      return;
+    }
 
-    // যদি auth এখনো loading হয়
-    if (loading) return;
-
-    // user না থাকলে
+    // ২. যদি লগইন করা ইউজার না থাকে
     if (!user?.email) {
       setRole(null);
       setRoleLoading(false);
       return;
     }
 
-    setRoleLoading(true);
-
-    fetch(`${import.meta.env.VITE_API_URL}/users/role/${user.email}`)
-      .then(res => res.json())
-      .then(data => {
-        setRole(data?.role || null);
-        setRoleLoading(false);
-      })
-      .catch(error => {
+    // ৩. ডাটা ফেচিং শুরু
+    let isMounted = true;
+    
+    const fetchUserRole = async () => {
+      try {
+        setRoleLoading(true);
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/users/role/${user.email}`);
+        const data = await res.json();
+        
+        if (isMounted) {
+          setRole(data?.role || null);
+          setRoleLoading(false);
+        }
+      } catch (error) {
         console.error("Role fetch error:", error);
-        setRole(null);
-        setRoleLoading(false);
-      });
+        if (isMounted) {
+          setRole(null);
+          setRoleLoading(false);
+        }
+      }
+    };
 
-  }, [user, loading]);
+    fetchUserRole();
+
+    // ক্লিনআপ ফাংশন (মেমোরি লিক রোধে)
+    return () => {
+      isMounted = false;
+    };
+  }, [user?.email, loading]); 
 
   return { role, roleLoading };
 };

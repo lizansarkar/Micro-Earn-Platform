@@ -1,7 +1,9 @@
 import React from 'react'
 
-export default function MySubmissions() {
+function MySubmissions() {
   return (
     <div>MySubmissions</div>
   )
 }
+
+export default MySubmissions
