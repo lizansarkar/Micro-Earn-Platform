@@ -28,7 +28,7 @@ const Sidebar = ({ setSidebarOpen }) => {
   const menuItems = {
     worker: [
       { name: "Dashboard", path: "/dashboard/worker", icon: <LayoutDashboard size={18} /> },
-      { name: "My Submissions", path: "/dashboard/worker/submissions", icon: <CheckSquare size={18} /> },
+      { name: "My Submissions", path: "/dashboard/worker/my-submissions", icon: <CheckSquare size={18} /> },
       { name: "Withdrawals", path: "/dashboard/worker/withdraw", icon: <Wallet size={18} /> },
     ],
     buyer: [

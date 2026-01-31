@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import useAuth from "../hooks/UseAuth";
 import useRole from "../hooks/useRole";
 
-const WorkerRoute = () => {
+const WorkerRoute = ({children}) => {
 const { role, roleLoading } = useRole();
 const { loading: authLoading } = useAuth();
   // AuthProvider থেকে user, userRole এবং loading নিচ্ছি
@@ -26,7 +26,7 @@ const { loading: authLoading } = useAuth();
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        <Outlet />
+        {children}
       </motion.div>
     );
   }

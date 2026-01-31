@@ -19,10 +19,10 @@ import BuyerRoute from "./BuyerRoute";
 /* ===== Worker Pages ===== */
 import WorkerHome from "../pages/Dashboard/Worker/WorkerHome";
 import TaskList from "../pages/Dashboard/Worker/TaskList";
-import MySubmissions from "../pages/dashboard/worker/MySubmissions";
 import TaskDetails from "../pages/Dashboard/Worker/TaskDetails";
 import ApprovedSubmissions from "../pages/Dashboard/Worker/ApprovedSubmissions";
 import Withdrawals from "../pages/Dashboard/Worker/Withdrawals";
+import MySubmissions from "../pages/Dashboard/Worker/MySubmissions";
 
 /* ===== Buyer Pages ===== */
 import BuyerHome from "../pages/Dashboard/Buyer/BuyerHome";
@@ -126,7 +126,7 @@ export const router = createBrowserRouter([
         path: "worker/my-submissions",
         element: (
           <WorkerRoute>
-            <MySubmissions />
+            <MySubmissions></MySubmissions>
           </WorkerRoute>
         ),
       },

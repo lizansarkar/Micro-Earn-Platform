@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import useAuth from "./UseAuth";
+import axios from "axios";
 
 const useRole = () => {
   const { user, loading } = useAuth();
@@ -23,24 +24,24 @@ const useRole = () => {
     // ৩. ডাটা ফেচিং শুরু
     let isMounted = true;
     
-    const fetchUserRole = async () => {
-      try {
-        setRoleLoading(true);
-        const res = await fetch(`${import.meta.env.VITE_API_URL}/users/role/${user.email}`);
-        const data = await res.json();
-        
-        if (isMounted) {
-          setRole(data?.role || null);
-          setRoleLoading(false);
-        }
-      } catch (error) {
-        console.error("Role fetch error:", error);
-        if (isMounted) {
-          setRole(null);
-          setRoleLoading(false);
-        }
-      }
-    };
+const fetchUserRole = async () => {
+  try {
+    setRoleLoading(true);
+    // সরাসরি axios ব্যবহার করুন
+    const { data } = await axios.get(`${import.meta.env.VITE_MY_WEBSITE_URL}/users/role/${user.email}`);
+    
+    if (isMounted) {
+      setRole(data?.role || null);
+      setRoleLoading(false);
+    }
+  } catch (error) {
+    console.error("Role fetch error:", error.response?.data || error.message);
+    if (isMounted) {
+      setRole(null);
+      setRoleLoading(false);
+    }
+  }
+};
 
     fetchUserRole();
 
