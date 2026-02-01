@@ -67,7 +67,15 @@ export default function Register() {
           color: "#fff",
           confirmButtonColor: "#5227ff",
         });
-        navigate("/dashboard");
+        // navigate("/dashboard");
+        // if(data.role === "worker"){
+        //   navigate("/dashboard/worker");
+        // } else if(data.role === "buyer"){
+        //   navigate("/dashboard/buyer");
+        // }
+        //  else {
+        //   navigate("/dashboard");
+        // }
       }
     } catch (error) {
       console.error(error);
