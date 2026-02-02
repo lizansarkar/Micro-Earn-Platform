@@ -82,13 +82,10 @@ export default function Login() {
       const result = await signInWithGoogle();
       const user = result.user;
       
-      // গুগল লগইনের ক্ষেত্রেও চেক করা উচিত সে আগে রেজিস্টার করেছে কি না
       const res = await axios.get(`http://localhost:3000/users/${user.email}`);
       if (res.data) {
         navigate(`/dashboard/${res.data.role.toLowerCase()}`);
       } else {
-        // যদি নতুন গুগল ইউজার হয়, তবে তাকে রেজিস্ট্রেশন পেজে পাঠিয়ে দিন অথবা 
-        // আপনি চাইলে অটো-রেজিস্ট্রেশন লজিক এখানে রাখতে পারেন (যেমনটা রেজিস্ট্রেশন পেজে ছিল)
         setLoginError("Please complete registration first.");
         await logout();
       }
