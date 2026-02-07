@@ -38,7 +38,7 @@ const DashboardNav = ({ setSidebarOpen }) => {
       <div className="flex items-center gap-4">
         <button 
           onClick={() => setSidebarOpen(true)} 
-          className="lg:hidden p-2 hover:bg-base-content/10 rounded-xl text-base-content/60 cursor-pointer transition-colors"
+          className="lg:hidden p-2 rounded-xl cursor-pointer transition-colors"
         >
           <Menu size={24} />
         </button>

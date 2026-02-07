@@ -52,7 +52,7 @@ const Sidebar = ({ setSidebarOpen }) => {
   const normalLink = "text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-white/5 hover:text-brand dark:hover:text-white border-transparent";
 
   return (
-    <div className="w-64 h-full bg-white dark:bg-white/[0.02] border border-gray-100 dark:border-white/10 rounded-[2.5rem] p-6 flex flex-col backdrop-blur-3xl shadow-xl dark:shadow-none transition-all duration-300">
+    <div className="w-64 h-full bg-white dark:bg-white/[0.02] border border-gray-100 dark:border-white/10 rounded-[2.5rem] p-6 flex flex-col backdrop-blur-3xl shadow-xl dark:shadow-none transition-all duration-300 mt-20">
       
       {/* ১. লোগো সেকশন */}
       <Link to="/" className="flex items-center mb-8 px-2">
@@ -84,21 +84,6 @@ const Sidebar = ({ setSidebarOpen }) => {
           </NavLink>
         ))}
       </nav>
-
-      {/* ৩. নিচের অপশনগুলো (Logout & Help) */}
-      <div className="mt-auto space-y-3 pt-4">
-        {/* Support Card */}
-        <div className="p-4 bg-brand/5 dark:bg-brand/10 rounded-3xl border border-brand/10">
-          <div className="flex items-center gap-3 mb-2">
-             <HeadphonesIcon size={14} className="text-brand"/>
-             <span className="text-[10px] text-brand font-black uppercase">Support</span>
-          </div>
-          <p className="text-gray-400 text-[8px] uppercase tracking-tighter font-medium">
-            Need any help with tasks? <br />
-            Visit our 24/7 center.
-          </p>
-        </div>
-      </div>
     </div>
   );
 };
