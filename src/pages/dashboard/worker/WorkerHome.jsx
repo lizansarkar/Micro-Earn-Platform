@@ -3,6 +3,7 @@ import MySubmissions from './MySubmissions'
 import TaskList from './TaskList'
 import TaskDetails from './TaskDetails'
 import Withdrawals from './Withdrawals'
+import ApprovedSubmissions from './ApprovedSubmissions'
 
 export default function WorkerHome() {
   return (
@@ -11,6 +12,7 @@ export default function WorkerHome() {
       <TaskList></TaskList>
       <TaskDetails></TaskDetails>
       <Withdrawals></Withdrawals>
+      <ApprovedSubmissions></ApprovedSubmissions>
       <MySubmissions></MySubmissions>
     </div>
   )
