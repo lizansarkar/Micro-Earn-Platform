@@ -29,7 +29,9 @@ const Sidebar = ({ setSidebarOpen }) => {
     worker: [
       { name: "Dashboard", path: "/dashboard/worker", icon: <LayoutDashboard size={18} /> },
       { name: "My Submissions", path: "/dashboard/worker/my-submissions", icon: <CheckSquare size={18} /> },
-      { name: "Withdrawals", path: "/dashboard/worker/withdraw", icon: <Wallet size={18} /> },
+      { name: "Task List", path: "/dashboard/worker/task-list", icon: <LayoutList size={18} /> },
+      { name: "Task Details", path: "/dashboard/worker/task/:id", icon: <ShieldAlert size={18} /> },
+      { name: "Withdrawals", path: "/dashboard/worker/withdrawals", icon: <Wallet size={18} /> },
     ],
     buyer: [
       { name: "Dashboard", path: "/dashboard/buyer", icon: <LayoutDashboard size={18} /> },
