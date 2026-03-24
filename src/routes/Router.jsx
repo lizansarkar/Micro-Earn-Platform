@@ -45,7 +45,8 @@ import About from "../pages/About/About";
 import Contact from "../pages/contact/Contact";
 import Support from "../pages/support/Support";
 
-
+/* ===== Other Page ===== */
+import UserSettings from "../components/common/UserSettings";
 
 export const router = createBrowserRouter([
   /* ================= PUBLIC ROUTES ================= */
@@ -97,6 +98,14 @@ export const router = createBrowserRouter([
       </PrivateRoute>
     ),
     children: [
+      {
+        path: "/dashboard/settings",
+        element: (
+          <PrivateRoute>
+            <UserSettings />
+          </PrivateRoute>
+        ),
+      },
       /* -------- WORKER DASHBOARD -------- */
       {
         path: "/dashboard/worker",

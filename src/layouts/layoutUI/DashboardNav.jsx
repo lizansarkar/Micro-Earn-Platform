@@ -3,7 +3,7 @@ import { Menu, Coins, Sun, Moon, LogOut, Settings, Home, LayoutDashboard, Zap } 
 import useAuth from "../../hooks/UseAuth";
 import useTheme from "../../hooks/useTheme";
 import { motion, AnimatePresence } from "framer-motion";
-import { useNavigate, NavLink } from "react-router";
+import { useNavigate, NavLink, Link } from "react-router";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const DashboardNav = ({ setSidebarOpen }) => {
@@ -128,9 +128,9 @@ const DashboardNav = ({ setSidebarOpen }) => {
                     <button className="w-full flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-primary/10 text-base-content/70 hover:text-primary transition-all text-xs font-bold uppercase cursor-pointer group">
                       <Zap size={16} className="text-primary group-hover:scale-110 transition-transform" /> My Profile
                     </button>
-                    <button className="w-full flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-primary/10 text-base-content/70 hover:text-primary transition-all text-xs font-bold uppercase cursor-pointer group">
+                    <Link to="/dashboard/settings" className="w-full flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-primary/10 text-base-content/70 hover:text-primary transition-all text-xs font-bold uppercase cursor-pointer group">
                       <Settings size={16} className="text-primary group-hover:rotate-45 transition-transform" /> Settings
-                    </button>
+                    </Link>
                   </div>
 
                   <div className="h-[1px] bg-base-content/5 my-2 mx-2"></div>
