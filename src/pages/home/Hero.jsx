@@ -58,28 +58,24 @@ export default function Hero() {
     },
   ];
 
-  const SLIDE_DURATION = 5000; // ৫ সেকেন্ড প্রতি স্লাইড
+  const SLIDE_DURATION = 5000;
 
   return (
     <section className="relative h-[90vh] md:h-screen w-full overflow-hidden -top-17">
-      
-      {/* --- SEGMENTED PROGRESS BAR (As per your Image) --- */}
       <div className="absolute top-0 left-0 w-full h-1.5 z-50 flex gap-1 px-4 mt-2">
         {slides.map((_, i) => (
           <div key={i} className="h-full flex-1 bg-white/20 rounded-full overflow-hidden">
-            {/* Background progress fill */}
             <div 
                className={`h-full transition-all duration-300 ${i < activeIndex ? 'bg-brand' : 'bg-transparent'}`}
                style={{ width: i < activeIndex ? '100%' : '0%' }}
             />
-            {/* Active animated fill */}
             {i === activeIndex && (
               <motion.div 
                 className="h-full bg-brand shadow-[0_0_10px_#5227ff]"
                 initial={{ width: "0%" }}
                 animate={{ width: "100%" }}
                 transition={{ duration: SLIDE_DURATION / 1000, ease: "linear" }}
-                key={activeIndex} // স্লাইড চেঞ্জ হলে এনিমেশন রিস্টার্ট হবে
+                key={activeIndex}
               />
             )}
           </div>

@@ -16,7 +16,6 @@ export default function ApprovedSubmissions() {
   return (
     <div className="min-h-screen bg-transparent p-4 lg:p-8">
       
-      {/* --- HEADER & STATS --- */}
       <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 mb-10">
         <div>
           <h1 className="text-3xl font-black text-slate-900 dark:text-white uppercase tracking-tighter flex items-center gap-3">

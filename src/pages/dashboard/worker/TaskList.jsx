@@ -4,7 +4,6 @@ import { Link } from "react-router"; // বা react-router-dom
 import { FaCoins, FaClock, FaUserTie, FaArrowRight } from "react-icons/fa";
 
 const TaskList = () => {
-  // ডামি ডাটা (পরে আপনি API থেকে ডাটা নিয়ে আসবেন)
   const tasks = [
     {
       _id: "1",

@@ -198,7 +198,7 @@ export default function TaskDetails() {
               </div>
             </div>
 
-            {/* Background Decoration - লাইট মোডে খুব হালকা দেখাবে */}
+            {/* Background Decoration - */}
             <div className="absolute -bottom-20 -right-20 w-64 h-64 bg-brand/5 dark:bg-brand/10 blur-[80px] rounded-full pointer-events-none"></div>
           </motion.div>
         </div>
