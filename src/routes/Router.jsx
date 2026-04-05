@@ -69,7 +69,7 @@ export const router = createBrowserRouter([
       {
         path: "support",
         element: <Support></Support>,
-      }
+      },
     ],
   },
 
@@ -103,6 +103,14 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <UserSettings />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/dashboard/profile",
+        element: (
+          <PrivateRoute>
+            <AdminHome />
           </PrivateRoute>
         ),
       },
